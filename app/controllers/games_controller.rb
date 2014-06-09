@@ -2,21 +2,12 @@ class GamesController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def create
-    @settings = Settings.new(params)
+    session[:game] = Game.new(WebGameStore.ai,         WebGameStore.board,
+                              WebGameStore.game_rules, WebGameStore.settings(params))
+    redirect_to ('/play')
   end
 
-  def welcome
-  end
-
-  def auto_refresh_board
-  end
-
-  def board
-  end
-
-  def game_over
-  end
-
-  def new_game
+  def process_board_for_new_game
+    binding.pry
   end
 end
