@@ -1,6 +1,8 @@
 class GamesController < ApplicationController
+  skip_before_action :verify_authenticity_token
 
   def create
+    @settings = Settings.new(params)
   end
 
   def welcome
