@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  get 'games/welcome'
+
+  get 'games/auto_refresh_board'
+
+  get 'games/board'
+
+  get 'games/game_over'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
