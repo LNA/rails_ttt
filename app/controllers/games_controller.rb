@@ -3,11 +3,12 @@ class GamesController < ApplicationController
 
   def create
     session[:game] = Game.new(WebGameStore.ai,         WebGameStore.board,
-                              WebGameStore.game_rules, WebGameStore.settings(params))
+                              WebGameStore.game_rules, WebGameStore.settings(params)).to_yaml
     redirect_to ('/play')
+
   end
 
   def process_board_for_new_game
-    binding.pry
+    session[:game] = YAML.load(session[:game])
   end
 end
