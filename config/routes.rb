@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   post 'new_game' => 'games#create'
 
+  get 'play'      => 'games#process_board_for_new_game'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
