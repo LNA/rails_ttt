@@ -1,2 +1,29 @@
-<h1>Games#auto_refresh_board</h1>
-<p>Find me in app/views/games/auto_refresh_board.html.erb</p>
+<!DOCTYPE HTML>
+<html>
+  <div class="container">
+    <head>
+      <link href="css/application.css" rel="stylesheet" type="text/css">
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+      <meta http-equiv="refresh" content="1;url=http://localhost:9292/ai_move" />
+    </head>
+  </div>
+  <body>
+    <div class="player_one">
+      <p> Player 1: </p> <%= session[:game].settings.player_one_type %>
+      <%= session[:game].settings.player_one_piece %>
+    </div>
+    <div class="player_two">
+      <p> Player 2: </p> <%= session[:game].settings.player_two_type %>
+      <%= session[:game].settings.player_two_piece %>
+    </div>
+    <form method="get" action="/ai_move">
+      <ul class="board clearfix">
+        <% @board.each_with_index do |square_value, index| %>
+          <li id="<%= index %>" class="square">
+            <%= square_value %>
+          </li>
+        <% end %>
+      </ul>
+    </form>
+  </body>
+</html>
