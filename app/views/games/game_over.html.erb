@@ -1,2 +1,7 @@
-<h1>Games#game_over</h1>
-<p>Find me in app/views/games/game_over.html.erb</p>
+<!DOCTYPE HTML>
+<% if session[:game].game_rules.winner(session[:game].board.spaces) == false %>
+  <h1> Its a Tie!</h1>
+<% else %>
+  <h1><%=session[:game].game_rules.winner(session[:game].board.spaces)%> Has Won!</h1>
+<% end %>
+<a href="/play_again">Play Again</a>
