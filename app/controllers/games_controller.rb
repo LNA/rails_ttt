@@ -13,7 +13,7 @@ class GamesController < ApplicationController
     if current_player_type == "AI"
       redirect_to ('/ai_move')
     end
-    erb '/board'.to_sym
+    render "board"
   end
 
  def process_human_move
@@ -21,7 +21,7 @@ class GamesController < ApplicationController
     make_human_move
     progress_game
     process_redirect
-    erb '/board'.to_sym
+    render "board"
   end
 
   def process_ai_move
@@ -32,13 +32,13 @@ class GamesController < ApplicationController
 
   def process_redirect
     redirect_to ('/ai_move') if current_player_type == "AI"
-    erb '/auto_refresh_board'.to_sym if current_player_type == "AI"
-    erb '/board'.to_sym if next_player_type == "Human"
+    render "auto_refresh_board" if current_player_type == "AI"
+    render "board" if next_player_type == "Human"
   end
 
   def process_replay
     session.clear
-    erb '/welcome'.to_sym
+    render "/welcome"
     redirect '/'
   end
 
@@ -51,7 +51,7 @@ class GamesController < ApplicationController
   end
 
   def render_auto_refresh_board
-    erb '/auto_refresh_board'.to_sym
+   render "/auto_refresh_board"
   end
 
   def game
