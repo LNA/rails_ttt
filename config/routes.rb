@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
   get 'play'      => 'games#process_board_for_new_game'
 
+  get 'ai_move'   => 'games#process_ai_move'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
