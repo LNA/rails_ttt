@@ -141,6 +141,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   jbuilder (~> 2.0)
   jquery-rails
+  json
   minimax_ttt (= 0.0.8)
   minitest
   pry

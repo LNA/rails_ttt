@@ -4,6 +4,7 @@ gem 'minimax_ttt', '0.0.8'
 gem 'pry'
 gem 'rspec-rails'
 gem 'minitest'
+gem 'json'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

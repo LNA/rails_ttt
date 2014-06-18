@@ -1,10 +1,9 @@
 class GamePresenter
   def parse_settings(game)
-    game.settings.instance_values
+    game.settings.to_json
   end
 
   def parse_board(game)
-    binding.pry
-    game.board.spaces.to_s
+    game.board.spaces.to_json
   end
 end
