@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'games/new'
+
   get 'games/welcome'
 
   get 'games/auto_refresh_board'
@@ -14,6 +16,7 @@ Rails.application.routes.draw do
 
   get 'ai_move'   => 'games#process_ai_move'
 
+  post 'move'     => 'games#process_human_move'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

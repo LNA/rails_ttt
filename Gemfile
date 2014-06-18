@@ -1,8 +1,11 @@
 source 'https://rubygems.org'
 
-gem 'minimax_ttt'
+gem 'minimax_ttt', '0.0.8'
 gem 'pry'
-gem 'activerecord-session_store'
+gem 'rspec-rails'
+gem 'minitest'
+
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
 # Use sqlite3 as the database for Active Record

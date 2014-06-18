@@ -8,6 +8,7 @@ Bundler.require(*Rails.groups)
 
 module Ttt
   class Application < Rails::Application
+    
     # Autoload lib/ folder including all subdirectories
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
     # Settings in config/environments/* take precedence over those specified here.
