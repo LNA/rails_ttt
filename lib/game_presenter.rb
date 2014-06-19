@@ -1,15 +1,15 @@
 class GamePresenter
   attr_accessor :game
-  
+
   def initialize(game)
     @game = game
   end
 
-  def parse_settings(game)
-    game.settings.to_json
+  def build_board
+    @game.board.spaces.to_s
   end
 
-  def parse_board(game)
-    game.board.spaces.to_json
+  def build_current_player
+    @game.settings.current_player.mark.to_s
   end
 end
