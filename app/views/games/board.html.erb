@@ -8,7 +8,7 @@
   </div>
   <body>
     <div class="player_one">
-      <p> Player 1: </p> <%= session[:game].settings.player_one_type %>
+      <p> Player 1: </p> <%= @presenter.current_player.mark views know about instance varialbes in rails %>
       <%= session[:game].settings.player_one_piece %>
     </div>
     <div class="player_two">
