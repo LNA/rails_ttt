@@ -8,8 +8,4 @@ class GamePresenter
   def build_board
     @game.board.spaces.to_s
   end
-
-  def build_current_player
-    @game.settings.current_player.mark.to_s
-  end
 end
