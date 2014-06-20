@@ -20,12 +20,24 @@
         <% @board.each_with_index do |square_value, index| %>
           <li id="<%= index %>" class="square">
             <% if square_value.nil? %>
+              <input type="hidden" name="player_one_type" value="<%= @players.player_one.type%>">
+              <input type="hidden" name="player_two_type" value="<%= @players.player_two.type%>">
+              <input type="hidden" name="player_one_mark" value="<%= @players.player_one.mark%>">
+              <input type="hidden" name="player_two_mark" value="<%= @players.player_two.mark%>">
+              <input type="hidden" name="next_player_mark" value="<%= @players.next_player_mark%>" >
+
+              <input type="hidden" name="next_player_type" value="<%= @players.next_player_type%>" >
+              <input type="hidden" name="next_player_mark" value="<%= @players.next_player_mark%>" >
               <input type="submit" name="square" value="<%= index %>">
+
+              <input type="hidden" name="current_player_mark"   value="<%= @players.current_player_mark%>" >
+              <input type="hidden" name="current_player_type"   value="<%= @players.current_player_type%>" >
             <% else %>
               <%= square_value %>
             <% end %>
           </li>
         <% end %>
+        <% %>
       </ul>
     </form>
   </body>
