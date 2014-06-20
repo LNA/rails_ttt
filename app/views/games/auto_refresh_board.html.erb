@@ -4,23 +4,27 @@
     <head>
       <link href="css/application.css" rel="stylesheet" type="text/css">
       <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-      <meta http-equiv="refresh" content="1;url=http://localhost:9292/ai_move" />
+      <meta http-equiv="refresh" content="1;url=http://localhost:3000/ai_move" />
     </head>
   </div>
-  <body>
+   <body>
     <div class="player_one">
-      <p> Player 1: </p> <%= session[:game].settings.player_one_type %>
-      <%= session[:game].settings.player_one_piece %>
+      <p> Player 1: </p> <%= @players.player_one.type %>
+      <%= @players.player_one.mark %>
     </div>
     <div class="player_two">
-      <p> Player 2: </p> <%= session[:game].settings.player_two_type %>
-      <%= session[:game].settings.player_two_piece %>
+      <p> Player 2: </p> <%= @players.player_two.type %>
+      <%= @players.player_two.mark %>
     </div>
     <form method="get" action="/ai_move">
       <ul class="board clearfix">
         <% @board.each_with_index do |square_value, index| %>
           <li id="<%= index %>" class="square">
-            <%= square_value %>
+            <% if square_value.nil? %>
+              <input type="submit" name="square" value="<%= index %>">
+            <% else %>
+              <%= square_value %>
+            <% end %>
           </li>
         <% end %>
       </ul>
