@@ -1,8 +1,8 @@
 require 'ai'
 require 'board'
 require 'game'
-require 'settings'
 require 'game_rules'
+
 class WebGameStore
   @@games = []
 
@@ -28,9 +28,5 @@ class WebGameStore
 
   def self.ai
     @ai = AI.new(GameRules.new)
-  end
-
-  def self.settings(params = {})
-    @settings = Settings.new(params)
   end
 end
