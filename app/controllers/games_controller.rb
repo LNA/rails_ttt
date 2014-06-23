@@ -14,7 +14,7 @@ class GamesController < ApplicationController
     check_for_winner
   end
 
-private
+#private
 
   def import_gem_dependencies
     @game = Game.new(WebGameStore.ai, WebGameStore.board, WebGameStore.game_rules)
