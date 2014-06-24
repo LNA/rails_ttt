@@ -1,4 +1,6 @@
 class GamesController < ApplicationController
+  attr_accessor :me
+
    skip_before_filter :verify_authenticity_token
 
   def create
@@ -22,6 +24,7 @@ class GamesController < ApplicationController
 
   def create_board
     @board = @game.board.spaces
+    params["board"] = @board
   end
 
   def create_players
@@ -45,7 +48,7 @@ class GamesController < ApplicationController
     @board.spaces = @interactor.build_from(params[:board])
   end
 
-  def process_move
+  def process_move  
     if params[:current_player_type] == "Human"
       if @board.spaces.count(nil).odd?
         @board.fill(params[:square].to_i, params[:current_player_mark]) 
@@ -58,8 +61,13 @@ class GamesController < ApplicationController
   end
 
   def ai_move
-    best_move = @ai.find_best_move(@board.spaces, params[:current_player_mark], params[:next_player_mark])
-    @board.fill(best_move,params[:current_player_mark])
+    if @board.spaces.count(nil).odd?
+      best_move = @ai.find_best_move(@board, params[:current_player_mark], params[:next_player_mark])
+      @board.fill(best_move,params[:current_player_mark])
+    else
+      best_move = @ai.find_best_move(@board, params[:next_player_mark], params[:current_player_mark])
+      @board.fill(best_move,params[:next_player_mark]) 
+    end
   end
 
   def check_for_winner
@@ -68,7 +76,7 @@ class GamesController < ApplicationController
     else
       create_players
       @board = @board.spaces
-      render "board"
+      render_board
     end
   end
 end
