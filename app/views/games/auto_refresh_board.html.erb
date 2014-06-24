@@ -4,7 +4,7 @@
     <head>
       <link href="css/application.css" rel="stylesheet" type="text/css">
       <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-      <meta http-equiv="refresh" content="1;url=http://localhost:3000/ai_move" />
+      <meta http-equiv="refresh" content="1;url=http://localhost:3000/ai_move?current_player_mark=<%= @players.player_one.mark%>&current_player_type=<%= @players.current_player_type%>&player_one_type=<%= @players.player_one.type%>&player_two_type=<%= @players.player_two.type%>&player_one_mark=<%= @players.player_one.mark%>&player_one_mark=<%= @players.player_one.mark%>&player_two_mark=<%= @players.player_two.mark%>&next_player_mark=<%= @players.next_player_mark%>&next_player_type=<%= @players.next_player_type%>&board=<%= @board%>">
     </head>
   </div>
    <body>
@@ -13,18 +13,15 @@
       <%= @players.player_one.mark %>
     </div>
     <div class="player_two">
-      <p> Player 2: </p> <%= @players.player_two.type %>
+      <p> Player 2: ARB</p> <%= @players.player_two.type %>
       <%= @players.player_two.mark %>
+       <input type="hidden" name="board" value="<%= @board%>">
     </div>
-    <form method="get" action="/ai_move">
+     <form method="get" action="/ai_move">
       <ul class="board clearfix">
         <% @board.each_with_index do |square_value, index| %>
           <li id="<%= index %>" class="square">
-            <% if square_value.nil? %>
-              <input type="submit" name="square" value="<%= index %>">
-            <% else %>
-              <%= square_value %>
-            <% end %>
+            <%= square_value %>
           </li>
         <% end %>
       </ul>
