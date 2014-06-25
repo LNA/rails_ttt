@@ -60,6 +60,9 @@ class GamesController < ApplicationController
 
   def ai_move
     if params[:current_player_type] == "AI"
+      if @board.spaces.count(nil).even?
+        params[:current_player_mark] = params[:player_two_mark]
+      end
       best_move = @ai.find_best_move(@board, params[:current_player_mark], params[:next_player_mark])
       @board.fill(best_move,params[:current_player_mark])
     end
