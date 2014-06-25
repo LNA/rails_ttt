@@ -5,14 +5,10 @@ Rails.application.routes.draw do
   post 'games/'          => 'games#board'
 
   post 'new_game'        => 'games#create'
-  
-  get 'games/play'       => 'games#process_board_for_new_game'
 
-  post 'games'           => 'games#update'   #process_human_move, process ai move, interactor
+  post 'move'            => 'games#update' 
 
-  get 'games/winner'     => 'games#winner'
-
-  get 'games/play_again' => 'games#process_replay'
+  get '/ai_move'        => 'games#update'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
