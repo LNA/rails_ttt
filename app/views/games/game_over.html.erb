@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
-<% if session[:game].game_rules.winner(session[:game].board.spaces) == false %>
+<% if @game_rules.winner(@board.spaces) == false %>
   <h1> Its a Tie!</h1>
 <% else %>
-  <h1><%=session[:game].game_rules.winner(session[:game].board.spaces)%> Has Won!</h1>
+  <h1><%=@game_rules.winner(@board.spaces)%> Has Won!</h1>
 <% end %>
-<a href="/play_again">Play Again</a>
+<a href="/games">Play Again</a>
