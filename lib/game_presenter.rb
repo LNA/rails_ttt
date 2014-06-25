@@ -5,7 +5,7 @@ class GamePresenter
     @game = game
   end
 
-  def build_board
-    @game.board.spaces.to_s
+  def build_board_from(game)
+    game.spaces.to_s
   end
 end
