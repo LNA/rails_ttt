@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-   skip_before_filter :verify_authenticity_token
+  skip_before_filter :verify_authenticity_token
 
   def create
     @new_game = CreateGame.new(params)
