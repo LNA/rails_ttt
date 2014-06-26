@@ -2,38 +2,18 @@ class GamesController < ApplicationController
    skip_before_filter :verify_authenticity_token
 
   def create
-    import_gem_dependencies
-    create_board
-    create_players
-    @players.current_player_type = params[:player_one_type]
-    @players.current_player_mark = params[:player_one_mark]
-    params[:current_player_type] = params[:player_one_type]
-    params[:current_player_mark] = params[:player_one_mark]
+    @new_game = CreateGame.new(params)
+    @new_game.create
     render_board
   end
 
   def update
     update_gem_dependencies
     process_move
-    check_for_winner
+    check_for_winner(params)
   end
 
 #private
-
-  def import_gem_dependencies
-    @game = Game.new(WebGameStore.ai, WebGameStore.board, WebGameStore.game_rules)
-  end
-
-  def create_board
-    @board = @game.board.spaces
-    params["board"] = @board
-  end
-
-  def create_players
-    @players = Players.new(params, Player.new, Player.new)
-    @players.create
-  end
-
   def render_board
     if params[:current_player_type] == "AI" 
       render "auto_refresh_board"
@@ -68,16 +48,13 @@ class GamesController < ApplicationController
     end
   end
 
-  def check_for_winner
+  def check_for_winner(params)
     if @game_rules.game_over?(@board.spaces)
       render "game_over"
     else
-      create_players 
-      params[:current_player_mark] = @players.next_player_mark
-      params[:current_player_type] = @players.next_player_type
-      @players.current_player_mark = @players.next_player_mark
-      @players.current_player_type = @players.next_player_type
-      @board = @board.spaces
+      @new_game = CreateGame.new(params)
+      @new_game.update_game
+      @new_game.game.board.spaces = @board.spaces
       render_board
     end
   end

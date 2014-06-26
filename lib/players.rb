@@ -7,8 +7,8 @@ class Players
     @params              = params
     @player_one          = player_one
     @player_two          = player_two
-    @current_player_mark = params["current_player_mark"]
-    @current_player_type = params["current_player_type"]
+    @current_player_mark = params[:current_player_mark]
+    @current_player_type = params[:current_player_type]
   end
 
   def create

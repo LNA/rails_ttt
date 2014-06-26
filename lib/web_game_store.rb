@@ -2,6 +2,8 @@ require 'ai'
 require 'board'
 require 'game'
 require 'game_rules'
+require 'player'
+require 'players'
 
 class WebGameStore
   @@games = []
@@ -28,5 +30,9 @@ class WebGameStore
 
   def self.ai
     @ai = AI.new(GameRules.new)
+  end
+
+  def self.players(params)
+    Players.new(params, Player.new, Player.new)
   end
 end
