@@ -13,7 +13,7 @@ class GamesController < ApplicationController
     check_for_winner(params)
   end
 
-#private
+private
   def render_board
     if params[:current_player_type] == "AI" 
       render "auto_refresh_board"
@@ -31,21 +31,8 @@ class GamesController < ApplicationController
   end
 
   def process_move  
-    if params[:current_player_type] == "Human"
-      @board.fill(params[:square].to_i, params[:current_player_mark]) 
-    else
-      ai_move
-    end
-  end
-
-  def ai_move
-    if params[:current_player_type] == "AI"
-      if @board.spaces.count(nil).even?
-        params[:current_player_mark] = params[:player_two_mark]
-      end
-      best_move = @ai.find_best_move(@board, params[:current_player_mark], params[:next_player_mark])
-      @board.fill(best_move,params[:current_player_mark])
-    end
+    @process_move = ProcessMove.new(params, @board, @ai)
+    @process_move.process
   end
 
   def check_for_winner(params)
