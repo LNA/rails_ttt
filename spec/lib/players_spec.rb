@@ -25,10 +25,13 @@ describe Players do
   end
 
   it "returns the mark of the next player" do   
+    test_players.current_player_mark = "X"
+
     expect(test_players.next_player_mark).to eq('O')
   end
 
   it "returns the type for the next player" do 
+    test_players.current_player_type = "Human"
     expect(test_players.next_player_type).to eq('AI')
   end
 end
