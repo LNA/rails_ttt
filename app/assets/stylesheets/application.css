@@ -88,8 +88,10 @@
  Clearfix */
 .clearfix:before,
 .clearfix:after {
-    content: " ";  1 
-    display: table; 
+    content: " ";  1 {
+
+    display: table;
+     } 
 }
 
 .clearfix:after {
