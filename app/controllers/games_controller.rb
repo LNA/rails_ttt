@@ -11,7 +11,8 @@ class GamesController < ApplicationController
   def update
     update_gem_dependencies
     process_move
-    check_for_winner(params)
+    update_adapter = UpdateAdapter.new(self, @game_rules, @board)
+    update_adapter.check_for_winner(params)
   end
 
   def render_auto_refresh_board
@@ -20,6 +21,10 @@ class GamesController < ApplicationController
 
   def render_human_board
     render "board"
+  end
+
+  def render_game_over
+    render "game_over"
   end
 
   def update_gem_dependencies
@@ -35,15 +40,11 @@ class GamesController < ApplicationController
     @process_move.process
   end
 
-  def check_for_winner(params)
-    if @game_rules.game_over?(@board.spaces)
-      render "game_over"
-    else
-      @game_factory = GameFactory.new(params)
-      @game_factory.updated_game    
-      @game_factory.game.board.spaces = @board.spaces
-      adapter = BoardAdapter.new(self, @game_factory.game.players.current_player_type)
-      adapter.render_board
-    end
+  def update_game(params)
+    @game_factory = GameFactory.new(params)
+    @game_factory.updated_game    
+    @game_factory.game.board.spaces = @board.spaces
+    adapter = BoardAdapter.new(self, @game_factory.game.players.current_player_type)
+    adapter.render_board
   end
 end
