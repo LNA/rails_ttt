@@ -4,22 +4,22 @@
     <head>
       <link href="css/application.css" rel="stylesheet" type="text/css">
       <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-      <meta http-equiv="refresh" content="1;url=http://localhost:3000/ai_move?current_player_mark=<%= @new_game.game.players.player_one.mark%>&current_player_type=<%= @new_game.game.players.current_player_type%>&player_one_type=<%= @new_game.game.players.player_one.type%>&player_two_type=<%= @new_game.game.players.player_two.type%>&player_one_mark=<%= @new_game.game.players.player_one.mark%>&player_one_mark=<%= @new_game.game.players.player_one.mark%>&player_two_mark=<%= @new_game.game.players.player_two.mark%>&next_player_mark=<%= @new_game.game.players.next_player_mark%>&next_player_type=<%= @new_game.game.players.next_player_type%>&board=<%= @new_game.game.board.spaces%>">
+      <meta http-equiv="refresh" content="1;url=http://localhost:3000/ai_move?current_player_mark=<%= @game_factory.game.players.player_one.mark%>&current_player_type=<%= @game_factory.game.players.current_player_type%>&player_one_type=<%= @game_factory.game.players.player_one.type%>&player_two_type=<%= @game_factory.game.players.player_two.type%>&player_one_mark=<%= @game_factory.game.players.player_one.mark%>&player_one_mark=<%= @game_factory.game.players.player_one.mark%>&player_two_mark=<%= @game_factory.game.players.player_two.mark%>&next_player_mark=<%= @game_factory.game.players.next_player_mark%>&next_player_type=<%= @game_factory.game.players.next_player_type%>&board=<%= @game_factory.game.board.spaces%>">
     </head>
   </div>
    <body>
     <div class="player_one">
-      <p> Player 1: </p> <%= @new_game.game.players.player_one.type %>
-      <%= @new_game.game.players.player_one.mark %>
+      <p> Player 1: </p> <%= @game_factory.game.players.player_one.type %>
+      <%= @game_factory.game.players.player_one.mark %>
     </div>
     <div class="player_two">
-      <p> Player 2: ARB</p> <%= @new_game.game.players.player_two.type %>
-      <%= @new_game.game.players.player_two.mark %>
+      <p> Player 2: ARB</p> <%= @game_factory.game.players.player_two.type %>
+      <%= @game_factory.game.players.player_two.mark %>
        <input type="hidden" name="board" value="<%= @board%>">
     </div>
      <form method="get" action="/ai_move">
       <ul class="board clearfix">
-        <% @new_game.game.board.spaces.each_with_index do |square_value, index| %>
+        <% @game_factory.game.board.spaces.each_with_index do |square_value, index| %>
           <li id="<%= index %>" class="square">
             <%= square_value %>
           </li>

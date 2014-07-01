@@ -1,4 +1,4 @@
-class CreateGame
+class GameFactory
   attr_accessor :game, :params
 
   def initialize(params)
@@ -6,11 +6,15 @@ class CreateGame
   end
 
   def create
-    import_gem_dependencies
+    create_updated_game
     create_board
-    create_players
     set_current_player
-    set_current_player_params
+  end
+
+  def create_updated_game
+    import_gem_dependencies
+    create_players
+    set_next_player_params  
   end
 
   def import_gem_dependencies
@@ -29,13 +33,8 @@ class CreateGame
   def set_current_player_params
     @game.players.current_player_type = params[:player_one_type]
     @game.players.current_player_mark = params[:player_one_mark]
-    params[:current_player_type]  = params[:player_one_type]
-    params[:current_player_mark]  = params[:player_one_mark]
-  end
-
-  def next_player
-    @game.players.current_player_mark = @game.players.next_player_mark
-    @game.players.current_player_type = @game.players.next_player_type
+    params[:current_player_type]      = params[:player_one_type]
+    params[:current_player_mark]      = params[:player_one_mark]
   end
 
   def set_current_player
@@ -43,11 +42,8 @@ class CreateGame
     @game.players.current_player_mark = params[:player_one_mark]
   end
 
-  def update_game
-    import_gem_dependencies
-    create_players 
-    params[:current_player_mark]      = @game.players.next_player_mark
-    params[:current_player_type]      = @game.players.next_player_type
-    next_player
+  def set_next_player_params
+    @game.players.current_player_mark = @game.players.next_player_mark
+    @game.players.current_player_type = @game.players.next_player_type
   end
 end

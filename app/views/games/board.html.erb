@@ -8,27 +8,27 @@
   </div>
   <body>
     <div class="player_one">
-      <p> Player 1: </p> <%= @new_game.game.players.player_one.type %>
-      <%= @new_game.game.players.player_one.mark %>
+      <p> Player 1: </p> <%= @game_factory.game.players.player_one.type %>
+      <%= @game_factory.game.players.player_one.mark %>
     </div>
     <div class="player_two">
-      <p> Player 2: </p> <%= @new_game.game.players.player_two.type %>
-      <%= @new_game.game.players.player_two.mark %>
+      <p> Player 2: </p> <%= @game_factory.game.players.player_two.type %>
+      <%= @game_factory.game.players.player_two.mark %>
     </div>
 <form method="post" action="/move">
   <ul class="board clearfix">
-    <% @new_game.game.board.spaces.each_with_index do |square_value, index| %>
+    <% @game_factory.game.board.spaces.each_with_index do |square_value, index| %>
       <li id="<%= index %>" class="square">
         <% if square_value.nil? %>
-         <input type="hidden" name="current_player_mark"   value="<%= @new_game.game.players.current_player_mark%>">
-         <input type="hidden" name="current_player_type"   value="<%= @new_game.game.players.current_player_type%>">
-         <input type="hidden" name="player_one_type"       value="<%= @new_game.game.players.player_one.type%>">
-         <input type="hidden" name="player_two_type"       value="<%= @new_game.game.players.player_two.type%>">
-         <input type="hidden" name="player_one_mark"       value="<%= @new_game.game.players.player_one.mark%>">
-         <input type="hidden" name="player_two_mark"       value="<%= @new_game.game.players.player_two.mark%>">
-         <input type="hidden" name="next_player_mark"      value="<%= @new_game.game.players.next_player_mark%>">
-         <input type="hidden" name="next_player_type"      value="<%= @new_game.game.players.next_player_type%>">
-         <input type="hidden" name="board" value="<%= @new_game.game.board.spaces%>">
+         <input type="hidden" name="current_player_mark"   value="<%= @game_factory.game.players.current_player_mark%>">
+         <input type="hidden" name="current_player_type"   value="<%= @game_factory.game.players.current_player_type%>">
+         <input type="hidden" name="player_one_type"       value="<%= @game_factory.game.players.player_one.type%>">
+         <input type="hidden" name="player_two_type"       value="<%= @game_factory.game.players.player_two.type%>">
+         <input type="hidden" name="player_one_mark"       value="<%= @game_factory.game.players.player_one.mark%>">
+         <input type="hidden" name="player_two_mark"       value="<%= @game_factory.game.players.player_two.mark%>">
+         <input type="hidden" name="next_player_mark"      value="<%= @game_factory.game.players.next_player_mark%>">
+         <input type="hidden" name="next_player_type"      value="<%= @game_factory.game.players.next_player_type%>">
+         <input type="hidden" name="board" value="<%= @game_factory.game.board.spaces%>">
          <input type="submit" name="square" value="<%= index %>">
         <% else %>
           <%= square_value %>

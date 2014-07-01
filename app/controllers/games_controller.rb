@@ -2,8 +2,8 @@ class GamesController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def create
-    @new_game = CreateGame.new(params)
-    @new_game.create
+    @game_factory = GameFactory.new(params)
+    @game_factory.create
     render_board
   end
 
@@ -39,9 +39,9 @@ private
     if @game_rules.game_over?(@board.spaces)
       render "game_over"
     else
-      @new_game = CreateGame.new(params)
-      @new_game.update_game
-      @new_game.game.board.spaces = @board.spaces
+      @game_factory = GameFactory.new(params)
+      @game_factory.create_updated_game    
+      @game_factory.game.board.spaces = @board.spaces
       render_board
     end
   end
