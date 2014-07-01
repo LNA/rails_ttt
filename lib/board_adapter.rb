@@ -7,7 +7,7 @@ class BoardAdapter
   end
 
   def render_board
-    if @player == "AI" 
+    if @player == "AI" # wrap sting
       @listner.render_auto_refresh_board
     else
       @listner.render_human_board

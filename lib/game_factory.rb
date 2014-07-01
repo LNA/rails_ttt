@@ -1,4 +1,4 @@
-class GameFactory
+class GameFactory#rename, make more functional 
   attr_accessor :game, :params
 
   def initialize(params)
@@ -11,13 +11,13 @@ class GameFactory
     set_current_player
   end
 
-  def updated_game
+  def updated_game #ABS
     import_gem_dependencies
     create_players
     set_next_player_params  
   end
 
-  def import_gem_dependencies
+  def import_gem_dependencies#rename #rename ttt_wrapper push down a level , should happen in game store
     @game = Game.new(WebGameStore.ai, WebGameStore.board, WebGameStore.game_rules, WebGameStore.players(@params))
   end
 
@@ -30,10 +30,10 @@ class GameFactory
     @game.players.create
   end
 
-  def set_current_player_params
+  def set_current_player_params #more than one thing
     @game.players.current_player_type = params[:player_one_type]
     @game.players.current_player_mark = params[:player_one_mark]
-    params[:current_player_type]      = params[:player_one_type]
+    params[:current_player_type]      = params[:player_one_type] #ABS params; look into strategy or another pattern
     params[:current_player_mark]      = params[:player_one_mark]
   end
 
