@@ -4,7 +4,8 @@ class GamesController < ApplicationController
   def create
     @game_factory = GameFactory.new(params)
     @game_factory.create
-    render_board
+    board_adapter = BoardAdapter.new(self, @game_factory.game.players.current_player_type)
+    board_adapter.render_board
   end
 
   def update
@@ -13,13 +14,12 @@ class GamesController < ApplicationController
     check_for_winner(params)
   end
 
-private
-  def render_board
-    if params[:current_player_type] == "AI" 
-      render "auto_refresh_board"
-    else
-      render "board"
-    end
+  def render_auto_refresh_board
+    render "auto_refresh_board"
+  end
+
+  def render_human_board
+    render "board"
   end
 
   def update_gem_dependencies
@@ -40,9 +40,10 @@ private
       render "game_over"
     else
       @game_factory = GameFactory.new(params)
-      @game_factory.create_updated_game    
+      @game_factory.updated_game    
       @game_factory.game.board.spaces = @board.spaces
-      render_board
+      adapter = BoardAdapter.new(self, @game_factory.game.players.current_player_type)
+      adapter.render_board
     end
   end
 end

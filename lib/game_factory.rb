@@ -6,12 +6,12 @@ class GameFactory
   end
 
   def create
-    create_updated_game
+    updated_game
     create_board
     set_current_player
   end
 
-  def create_updated_game
+  def updated_game
     import_gem_dependencies
     create_players
     set_next_player_params  
