@@ -39,4 +39,8 @@ class WebGameStore
   def self.ttt_wrapper(params)
     Game.new(WebGameStore.ai, WebGameStore.board, WebGameStore.game_rules, WebGameStore.players(params))
   end
+
+  def self.update_ttt_wrapper(params)
+    Game.new(WebGameStore.ai, WebGameStore.board, WebGameStore.game_rules, WebGameStore.players(params))
+  end
 end

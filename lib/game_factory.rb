@@ -1,8 +1,9 @@
 class GameFactory#rename, make more functional 
-  attr_accessor :game, :params
+  attr_accessor :game, :params, :players
 
-  def initialize(params)
-    @params = params 
+  def initialize(game, params)
+    @game = game 
+    @params = params
   end
 
   def create
@@ -10,16 +11,6 @@ class GameFactory#rename, make more functional
     set_next_player_params 
     create_board
     set_current_player
-  end
-
-  def updated_game #ABS
-    import_gem_dependencies
-    create_players
-    set_next_player_params  
-  end
-
-  def import_gem_dependencies#rename #rename ttt_wrapper push down a level , should happen in game store
-    @game = Game.new(WebGameStore.ai, WebGameStore.board, WebGameStore.game_rules, WebGameStore.players(@params))
   end
 
   def create_board
