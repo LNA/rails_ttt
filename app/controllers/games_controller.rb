@@ -3,16 +3,16 @@ class GamesController < ApplicationController
 
   def create #pass only data i need instad of all of the params
     @game = WebGameStore.ttt_wrapper(params)
-    @game_factory = GameFactory.new(@game, params)
-    @game_factory.create
-    board_adapter = BoardAdapter.new(self, @game_factory.game.players.current_player_type) #defend
+    @game_creator = GameCreator.new(@game, params)
+    @game_creator.create
+    board_adapter = BoardAdapter.new(self, @game_creator.game.players.current_player_type) 
     board_adapter.render_board # What potential downfalls?
   end
 
   def update 
     @game = WebGameStore.update_ttt_wrapper(params)
-    @interactor = Interactor.new
-    @game.board.spaces = @interactor.build_from(params[:board])
+    @string_processor = StringToObjectProcessor.new
+    @game.board.spaces = @string_processor.build_from(params[:board])
     process_move
     params[:board] = @game.board.spaces.to_s
     update_adapter = UpdateAdapter.new(self, @game) 
@@ -32,14 +32,14 @@ class GamesController < ApplicationController
   end
 
   def process_move  
-    @process_move = ProcessMove.new(params, @game)
-    @process_move.process
+    @processor = MoveProcessor.new(params, @game)
+    @processor.process
   end
 
   def update_game(params) 
     @game = WebGameStore.update_ttt_wrapper(params)
-    @interactor = Interactor.new
-    @game.board.spaces = @interactor.build_from(params[:board])
+    @string_processor = StringToObjectProcessor.new
+    @game.board.spaces = @string_processor.build_from(params[:board])
     @game.players.create
     @game.players.current_player_mark = @game.players.next_player_mark
     @game.players.current_player_type = @game.players.next_player_type

@@ -1,4 +1,4 @@
-class ProcessMove
+class MoveProcessor
   attr_accessor :game, :params
 
   def initialize(params, game)
@@ -10,7 +10,7 @@ class ProcessMove
 
   def process
     if params[:current_player_type] == HUMAN 
-      @game.board.fill(params[:square].to_i, params[:current_player_mark]) 
+      make_human_move 
     else
       process_order_of_players
       ai_move
@@ -18,6 +18,9 @@ class ProcessMove
   end
 
 private
+  def make_human_move
+    @game.board.fill(params[:square].to_i, params[:current_player_mark]) 
+  end
 
   def process_order_of_players
     if ai_is_second_player? 
