@@ -2,10 +2,14 @@ class GamesController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def create #pass only data i need instad of all of the params
-    @game = WebGameStore.ttt_wrapper(params)
-    @game_creator = GameCreator.new(@game, params)
-    @game_creator.create
-    board_adapter = BoardAdapter.new(self, @game_creator.game.players.current_player_type) 
+    player_one_mark = ParamProcessor.new(params).process(:player_one_mark)
+    player_one_type = ParamProcessor.new(params).process(:player_one_type)
+    player_two_mark = ParamProcessor.new(params).process(:player_two_mark)
+    player_two_type = ParamProcessor.new(params).process(:player_two_type)
+   
+    @game = WebGameStore.ttt_wrapper(player_one_mark, player_one_type, player_two_mark, player_two_type)
+    @game.players.create
+    board_adapter = BoardAdapter.new(self, @game.players.current_player_type) 
     board_adapter.render_board # What potential downfalls?
   end
 
