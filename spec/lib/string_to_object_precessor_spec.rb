@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Interactor do
-  let (:test_interactor) { Interactor.new}
+describe StringToObjectProcessor do
+  let (:test_interactor) { StringToObjectProcessor.new}
   let (:test_string)     { "[nil, nil, nil, nil, nil, nil, nil, nil, nil]" }
 
   it "converts the board from a string to a ruby object" do
