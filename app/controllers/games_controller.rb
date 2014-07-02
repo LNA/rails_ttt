@@ -15,7 +15,7 @@ class GamesController < ApplicationController
     @game.board.spaces = @interactor.build_from(params[:board])
     process_move
     params[:board] = @game.board.spaces.to_s
-    update_adapter = UpdateAdapter.new(self, @game) #defend
+    update_adapter = UpdateAdapter.new(self, @game) 
     update_adapter.check_for_winner(params)
   end
 
@@ -36,14 +36,13 @@ class GamesController < ApplicationController
     @process_move.process
   end
 
-  def update_game(params) #making the move but not storing
+  def update_game(params) 
     @game = WebGameStore.update_ttt_wrapper(params)
     @interactor = Interactor.new
     @game.board.spaces = @interactor.build_from(params[:board])
     @game.players.create
     @game.players.current_player_mark = @game.players.next_player_mark
     @game.players.current_player_type = @game.players.next_player_type
-    # binding.pry
     adapter = BoardAdapter.new(self, @game.players.current_player_type) 
     adapter.render_board
   end
