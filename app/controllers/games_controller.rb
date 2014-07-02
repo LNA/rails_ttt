@@ -2,6 +2,7 @@ class GamesController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def create #pass only data i need instad of all of the params
+    @game = WebGameStore.ttt_wrapper(params)
     @game_factory = GameFactory.new(params)
     @game_factory.create
     board_adapter = BoardAdapter.new(self, @game_factory.game.players.current_player_type) #don't pass self in
