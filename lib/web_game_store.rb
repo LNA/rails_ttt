@@ -32,12 +32,13 @@ class WebGameStore
     @ai = AI.new(GameRules.new)
   end
 
-  def self.players(params)
-    Players.new(params, Player.new, Player.new)
+
+  def self.ttt_wrapper(player_one_mark, player_one_type, player_two_mark, player_two_type)
+    Game.new(WebGameStore.ai, WebGameStore.board, WebGameStore.game_rules, WebGameStore.players(player_one_mark, player_one_type, player_two_mark, player_one_type))
   end
 
-  def self.ttt_wrapper(params)
-    Game.new(WebGameStore.ai, WebGameStore.board, WebGameStore.game_rules, WebGameStore.players(params))
+  def self.players(player_one_mark, player_one_type, player_two_mark, player_two_type)
+    @players = Players.new(player_one_mark, player_one_type, player_two_mark, player_two_type, Player.new, Player.new)
   end
 
   def self.update_ttt_wrapper(params)
