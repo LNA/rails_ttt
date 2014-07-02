@@ -1,14 +1,17 @@
 class ProcessMove
-  attr_accessor :updated_game, :params
+  attr_accessor :game, :params
 
-  def initialize(params, updated_game)
+  def initialize(params, game)
     @params = params 
-    @updated_game = updated_game
+    @game = game
   end
 
+  HUMAN = "Human"
+
   def process
-    if params[:current_player_type] == "Human" #constant
-      @updated_game.board.fill(params[:square].to_i, params[:current_player_mark]) 
+    if params[:current_player_type] == HUMAN 
+      binding.pry
+      @game.board.fill(params[:square].to_i, params[:current_player_mark]) 
     else
       ai_move
     end
