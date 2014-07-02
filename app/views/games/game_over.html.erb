@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
-<% if @game_rules.winner(@board.spaces) == false %>
+<% if @game.game_rules.winner(@game.board.spaces) == false %>
   <h1> Its a Tie!</h1>
 <% else %>
-  <h1><%=@game_rules.winner(@board.spaces)%> Has Won!</h1>
+  <h1><%=@game.game_rules.winner(@game.board.spaces)%> Has Won!</h1>
 <% end %>
 <a href="/games">Play Again</a>
