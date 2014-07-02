@@ -10,7 +10,6 @@ class ProcessMove
 
   def process
     if params[:current_player_type] == HUMAN 
-      binding.pry
       @game.board.fill(params[:square].to_i, params[:current_player_mark]) 
     else
       ai_move

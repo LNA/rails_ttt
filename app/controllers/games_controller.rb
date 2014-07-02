@@ -5,16 +5,17 @@ class GamesController < ApplicationController
     @game = WebGameStore.ttt_wrapper(params)
     @game_factory = GameFactory.new(@game, params)
     @game_factory.create
-    board_adapter = BoardAdapter.new(self, @game_factory.game.players.current_player_type) #don't pass self in
-    board_adapter.render_board
+    board_adapter = BoardAdapter.new(self, @game_factory.game.players.current_player_type) #defend
+    board_adapter.render_board # What potential downfalls?
   end
 
-  def update
+  def update 
     @game = WebGameStore.update_ttt_wrapper(params)
     @interactor = Interactor.new
     @game.board.spaces = @interactor.build_from(params[:board])
     process_move
-    update_adapter = UpdateAdapter.new(self, @game) #don't pass self
+    params[:board] = @game.board.spaces.to_s
+    update_adapter = UpdateAdapter.new(self, @game) #defend
     update_adapter.check_for_winner(params)
   end
 
@@ -35,12 +36,15 @@ class GamesController < ApplicationController
     @process_move.process
   end
 
-  def update_game(params)
+  def update_game(params) #making the move but not storing
     @game = WebGameStore.update_ttt_wrapper(params)
+    @interactor = Interactor.new
+    @game.board.spaces = @interactor.build_from(params[:board])
     @game.players.create
     @game.players.current_player_mark = @game.players.next_player_mark
     @game.players.current_player_type = @game.players.next_player_type
-    adapter = BoardAdapter.new(self, @game.players.current_player_type) #don't pass self
+    # binding.pry
+    adapter = BoardAdapter.new(self, @game.players.current_player_type) 
     adapter.render_board
   end
 end
