@@ -1,39 +1,47 @@
 class MoveProcessor
-  attr_accessor :game, :params
+  attr_accessor :game
 
-  def initialize(params, game)
-    @params = params 
+  def initialize(game)
     @game = game
   end
 
   HUMAN = "Human"
 
-  def process
-    if params[:current_player_type] == HUMAN 
-      make_human_move 
+  def process(current_player_mark, current_player_type, player_one_mark, player_two_mark, next_player_mark, move)
+    current_player_mark = process_current_player(current_player_mark, player_two_mark)
+    next_player_mark    = process_next_player(next_player_mark, player_one_mark)
+    if current_player_type == HUMAN 
+      make_human_move(current_player_mark, move)
     else
-      process_order_of_players
-      ai_move
+      ai_move(current_player_mark, next_player_mark)
     end
   end
 
 private
-  def make_human_move
-    @game.board.fill(params[:square].to_i, params[:current_player_mark]) 
+  def make_human_move(current_player_mark, move)
+    @game.board.fill(move, current_player_mark) 
   end
 
-  def process_order_of_players
-    if ai_is_second_player? 
-      params[:current_player_mark] = params[:player_two_mark]
+  def process_current_player(current_player_mark, player_two_mark)
+    if is_second_player? 
+      current_player_mark = player_two_mark
     end
+    current_player_mark
   end
 
-  def ai_move 
-    best_move = @game.ai.find_best_move(@game.board, params[:current_player_mark], params[:next_player_mark])
-    @game.board.fill(best_move,params[:current_player_mark])
+  def process_next_player(current_player_mark, player_one_mark)
+    if is_second_player? 
+      current_player_mark = player_one_mark
+    end
+    current_player_mark
   end
 
-  def ai_is_second_player?
+  def ai_move(current_player_mark, next_player_mark) 
+    best_move = @game.ai.find_best_move(@game.board, current_player_mark, next_player_mark)
+    @game.board.fill(best_move, current_player_mark)
+  end
+
+  def is_second_player?
     @game.board.spaces.count(nil).even?
   end
 end
