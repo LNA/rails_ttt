@@ -33,7 +33,7 @@ class WebGameStore
     @ai = AI.new(GameRules.new)
   end
 
-  def self.process(params)
+  def self.process(params) # another class???
     @player_one_mark = ParamProcessor.new(params).process(:player_one_mark) 
     @player_one_type = ParamProcessor.new(params).process(:player_one_type)
     @player_two_mark = ParamProcessor.new(params).process(:player_two_mark)
