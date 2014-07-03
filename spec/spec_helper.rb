@@ -11,6 +11,7 @@ require 'mock_ai'
 require 'mock_board'
 require 'mock_game'
 require 'mock_game_rules'
+require 'mock_move_maker'
 require 'mock_players'
 
 # Requires supporting ruby files with custom matchers and macros, etc,

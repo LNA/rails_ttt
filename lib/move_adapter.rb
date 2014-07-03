@@ -21,6 +21,7 @@ class MoveAdapter
     end
     current_player_mark
   end
+  
   def process_move(current_player_mark, current_player_type, next_player_mark, move)
     if current_player_type == HUMAN 
       @move_maker.make_human_move(current_player_mark, move)
@@ -29,7 +30,6 @@ class MoveAdapter
     end
   end
 
-  private
   def is_second_player?
     @game.board.spaces.count(nil).even?
   end

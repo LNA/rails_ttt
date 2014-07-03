@@ -4,7 +4,7 @@ class MockBoard
                 :resets_board,
                 :spaces
   def spaces
-    @spaces = true
+    @spaces ||= true
   end
 
   def fill(move, piece)
