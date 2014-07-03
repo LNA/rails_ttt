@@ -1,24 +1,21 @@
 class GamesController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
-  def create #pass only data i need instad of all of the params
-    player_one_mark = ParamProcessor.new(params).process(:player_one_mark)
-    player_one_type = ParamProcessor.new(params).process(:player_one_type)
-    player_two_mark = ParamProcessor.new(params).process(:player_two_mark)
-    player_two_type = ParamProcessor.new(params).process(:player_two_type)
-   
-    @game = WebGameStore.ttt_wrapper(player_one_mark, player_one_type, player_two_mark, player_two_type)
-    @game.players.create
+  def create 
+    @game = WebGameStore.game(params)
     board_adapter = BoardAdapter.new(self, @game.players.current_player_type) 
     board_adapter.render_board # What potential downfalls?
   end
 
   def update 
-    @game = WebGameStore.update_ttt_wrapper(params)
+    @game = WebGameStore.updated_game(params)
+
     @string_processor = StringToObjectProcessor.new
     @game.board.spaces = @string_processor.build_from(params[:board])
-    process_move
+
+    process_move(@game.players.current_player_mark, @game.players.current_player_type, @game.players.player_one.mark, @game.players.player_two.mark, @game.players.next_player_mark, params[:square].to_i)
     params[:board] = @game.board.spaces.to_s
+
     update_adapter = UpdateAdapter.new(self, @game) 
     update_adapter.check_for_winner(params)
   end
@@ -35,18 +32,20 @@ class GamesController < ApplicationController
     render "game_over"
   end
 
-  def process_move  
-    @processor = MoveProcessor.new(params, @game)
-    @processor.process
+  def process_move(current_player_mark, current_player_type, player_one_mark, player_two_mark, next_player_mark, move)  
+    @processor = MoveProcessor.new(@game)
+    @processor.process(current_player_mark, current_player_type, player_one_mark, player_two_mark, next_player_mark, move)
   end
 
   def update_game(params) 
-    @game = WebGameStore.update_ttt_wrapper(params)
+    @game = WebGameStore.updated_game(params)
+
     @string_processor = StringToObjectProcessor.new
     @game.board.spaces = @string_processor.build_from(params[:board])
-    @game.players.create
+
     @game.players.current_player_mark = @game.players.next_player_mark
     @game.players.current_player_type = @game.players.next_player_type
+
     adapter = BoardAdapter.new(self, @game.players.current_player_type) 
     adapter.render_board
   end
