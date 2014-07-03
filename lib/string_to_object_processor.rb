@@ -1,4 +1,4 @@
-class StringToObjectProcessor #better name
+class StringToObjectProcessor 
   def build_from(string)
     eval(string)
   end
