@@ -1,14 +1,13 @@
 require 'spec_helper'
 
 describe Players do
-  let (:params)    {  {"player_one_type"=>"Human",
-                       "player_one_mark"=>"X",
-                       "player_two_type"=>"AI",
-                       "player_two_mark"=>"O"}  }
-
-  let (:player_one)    {Player.new}
-  let (:player_two)    {Player.new}
-  let (:test_players)  {Players.new(params, player_one, player_two)}
+  let(:player_one_mark) { "X" }
+  let(:player_one_type) { "Human" }
+  let(:player_two_mark) { "O" }
+  let(:player_two_type) { "AI" }
+  let(:player_one)      { Player.new }
+  let(:player_two)      { Player.new }
+  let (:test_players)   {Players.new(player_one_mark, player_one_type, player_two_mark, player_two_type, player_one, player_two)}
 
   before (:each) do 
     test_players.create
