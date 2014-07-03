@@ -27,11 +27,6 @@ class Players
     @current_player_type == @player_one.type ? @player_two.type : @player_one.type
   end
 
-  # def update
-  #   params[:current_player_mark]  = params[:next_player_mark]
-  #   params[:current_player_type]  = params[:next_player_type]
-  # end
-
 private
 
   def create_player_one
