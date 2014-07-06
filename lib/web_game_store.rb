@@ -33,7 +33,7 @@ class WebGameStore
     @ai = AI.new(GameRules.new)
   end
 
-  def self.process(params) # another class???
+  def self.process(params) # better name
     @player_one_mark = ParamProcessor.new(params).process(:player_one_mark) 
     @player_one_type = ParamProcessor.new(params).process(:player_one_type)
     @player_two_mark = ParamProcessor.new(params).process(:player_two_mark)
@@ -41,7 +41,7 @@ class WebGameStore
   end
 
   def self.ttt_wrapper
-    Game.new(WebGameStore.ai, WebGameStore.board, WebGameStore.game_rules, WebGameStore.players(@player_one_mark, @player_one_type, @player_two_mark, @player_one_type))
+    Game.new(WebGameStore.ai, WebGameStore.board, WebGameStore.game_rules, WebGameStore.players(@player_one_mark, @player_one_type, @player_two_mark, @player_two_type))
   end
 
   def self.game(params)
