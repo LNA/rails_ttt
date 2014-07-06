@@ -7,7 +7,6 @@ class MoveProcessor
 
   HUMAN = "Human"
 
-
   def process(current_player_mark, current_player_type, player_one_mark, player_two_mark, next_player_mark, move)
     current_player_mark = process_current_player(current_player_mark, player_two_mark)
     next_player_mark    = process_next_player(next_player_mark, player_one_mark)
