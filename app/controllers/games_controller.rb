@@ -9,20 +9,19 @@ class GamesController < ApplicationController
 
   def update 
     @game = WebGameStore.updated_game(params)
-    @game.board.spaces = StringToObjectProcessor.new.build_from(params[:board])
+    @game.board = StringToObjectProcessor.new.build_from(params[:board])
     MovePresenter.present_move(@game, @game.players.current_player_mark, @game.players.current_player_type, @game.players.player_one.mark, @game.players.player_two.mark, @game.players.next_player_mark, params[:square].to_i)
-    params[:board] = @game.board.spaces.to_s 
+    board_wrapper = BoardWrapper.new(@game)
+    params[:board] = board_wrapper.convert_board_to_string
     update_adapter = UpdateAdapter.new(self, @game) 
     update_adapter.check_for_winner(params)
   end
 
   def update_game(params) 
     @game = WebGameStore.updated_game(params)
-    @game.board.spaces = StringToObjectProcessor.new.build_from(params[:board])
-
+    @game.board = StringToObjectProcessor.new.build_from(params[:board])
     @game.players.current_player_mark = @game.players.next_player_mark 
-    @game.players.current_player_type = @game.players.next_player_type
-
+    @game.players.current_player_type = @game.players.next_player_type 
     adapter = BoardAdapter.new(self, @game.players.current_player_type) 
     adapter.render_board
   end

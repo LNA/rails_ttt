@@ -4,7 +4,7 @@
     <head>
       <link href="css/application.css" rel="stylesheet" type="text/css">
       <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-      <meta http-equiv="refresh" content="1;url=http://localhost:3000/ai_move?current_player_mark=<%= @game.players.player_one.mark%>&current_player_type=<%= @game.players.current_player_type%>&player_one_type=<%= @game.players.player_one.type%>&player_two_type=<%= @game.players.player_two.type%>&player_one_mark=<%= @game.players.player_one.mark%>&player_one_mark=<%= @game.players.player_one.mark%>&player_two_mark=<%= @game.players.player_two.mark%>&next_player_mark=<%= @game.players.next_player_mark%>&next_player_type=<%= @game.players.next_player_type%>&board=<%= @game.board.spaces%>">
+      <meta http-equiv="refresh" content="1;url=http://localhost:3000/ai_move?current_player_mark=<%= @game.players.player_one.mark%>&current_player_type=<%= @game.players.current_player_type%>&player_one_type=<%= @game.players.player_one.type%>&player_two_type=<%= @game.players.player_two.type%>&player_one_mark=<%= @game.players.player_one.mark%>&player_one_mark=<%= @game.players.player_one.mark%>&player_two_mark=<%= @game.players.player_two.mark%>&next_player_mark=<%= @game.players.next_player_mark%>&next_player_type=<%= @game.players.next_player_type%>&board=<%= @game.board %>">
     </head>
   </div>
    <body>
@@ -19,7 +19,7 @@
     </div>
      <form method="get" action="/ai_move">
       <ul class="board clearfix">
-        <% @game.board.spaces.each_with_index do |square_value, index| %>
+        <% @game.board.each_with_index do |square_value, index| %>
           <li id="<%= index %>" class="square">
             <%= square_value %>
           </li>

@@ -3,8 +3,10 @@ class MoveMaker
     @game = game
   end
 
- def make_human_move(current_player_mark, move)
-    @game.board.fill(move, current_player_mark) 
+  def make_human_move(current_player_mark, move)
+    if @game.board[move] == nil && move.to_i < 9
+      @game.board[move] = current_player_mark
+    end
   end
 
   def ai_move(current_player_mark, next_player_mark) 

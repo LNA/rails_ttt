@@ -10,6 +10,7 @@ class MoveProcessor
   def process(current_player_mark, current_player_type, player_one_mark, player_two_mark, next_player_mark, move)
     current_player_mark = process_current_player(current_player_mark, player_two_mark)
     next_player_mark    = process_next_player(next_player_mark, player_one_mark)
+    #need to set current player type
     process_move(current_player_mark, current_player_type, next_player_mark, move)
   end
   
@@ -38,6 +39,6 @@ class MoveProcessor
   end
 
   def is_second_player?
-    @game.board.spaces.count(nil).even?
+    @game.board.count(nil).even?
   end
 end

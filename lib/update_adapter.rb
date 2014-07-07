@@ -8,7 +8,7 @@ class UpdateAdapter
   end
 
   def check_for_winner(params)
-    if @game.game_rules.game_over?(@game.board.spaces)
+    if @game.game_rules.game_over?(@game.board)
       @listner.render_game_over
     else
       @listner.update_game(params)

@@ -41,7 +41,7 @@ class WebGameStore
   end
 
   def self.ttt_wrapper
-    Game.new(WebGameStore.ai, WebGameStore.board, WebGameStore.game_rules, WebGameStore.players(@player_one_mark, @player_one_type, @player_two_mark, @player_two_type))
+    Game.new(WebGameStore.ai, WebGameStore.board.spaces, WebGameStore.game_rules, WebGameStore.players(@player_one_mark, @player_one_type, @player_two_mark, @player_two_type))
   end
 
   def self.game(params)
