@@ -2,12 +2,13 @@ class Game
   attr_accessor :ai,
                 :board,
                 :game_rules,
-                :players
+                :player_one, :player_two
 
-  def initialize(ai, board, game_rules, players)
-    @ai               = ai
-    @board            = board
-    @game_rules       = game_rules
-    @players          = players
+  def initialize(ai, board, game_rules, player_one, player_two)
+    @ai         = ai
+    @board      = board
+    @game_rules = game_rules
+    @player_one = player_one
+    @player_two = player_two
   end
 end

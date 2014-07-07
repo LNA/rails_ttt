@@ -40,29 +40,30 @@ class WebGameStore
     @player_two_type = ParamProcessor.new(params).process(:player_two_type)
   end
 
+  def self.player_one
+    @player_one = Player.new(@player_one_mark, @player_one_type)
+  end
+
+  def self.player_two
+    @player_two = Player.new(@player_two_mark, @player_two_type)
+  end
+
   def self.ttt_wrapper
-    Game.new(WebGameStore.ai, WebGameStore.board.spaces, WebGameStore.game_rules, WebGameStore.players(@player_one_mark, @player_one_type, @player_two_mark, @player_two_type))
+    Game.new(WebGameStore.ai, WebGameStore.board.spaces, WebGameStore.game_rules, WebGameStore.player_one, WebGameStore.player_two)
   end
 
   def self.game(params)
     self.process(params)
     @game = WebGameStore.ttt_wrapper
-    @game.players.create
     @game
   end
 
   def self.updated_game(params)
     self.process(params)
     @game = WebGameStore.update_ttt_wrapper
-    @game.players.create 
-    @game
-  end
-
-  def self.players(player_one_mark, player_one_type, player_two_mark, player_two_type)
-    @players = Players.new(@player_one_mark, @player_one_type, @player_two_mark, @player_two_type, Player.new, Player.new)
   end
 
   def self.update_ttt_wrapper
-    Game.new(WebGameStore.ai, WebGameStore.board, WebGameStore.game_rules, WebGameStore.players(@player_one_mark, @player_one_type, @player_two_mark, @player_two_type))
+    Game.new(WebGameStore.ai, WebGameStore.board, WebGameStore.game_rules, WebGameStore.player_one, WebGameStore.player_two)
   end
 end

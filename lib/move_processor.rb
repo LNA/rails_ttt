@@ -7,34 +7,33 @@ class MoveProcessor
 
   HUMAN = "Human"
 
-  def process(current_player_mark, current_player_type, player_one_mark, player_two_mark, next_player_mark, move)
-    current_player_mark = process_current_player(current_player_mark, player_two_mark)
-    next_player_mark    = process_next_player(next_player_mark, player_one_mark)
-    #need to set current player type
-    process_move(current_player_mark, current_player_type, next_player_mark, move)
+  def process(player_presenter, move)
+    current_player_mark = set_current_player_mark(player_presenter)
+    next_player_mark    = set_next_player_mark(player_presenter)
+    process_move(player_presenter, move)
   end
   
   private
 
-  def process_current_player(current_player_mark, player_two_mark) #duplication to be explicit?
+  def set_current_player_mark(player_presenter) #duplication to be explicit?
     if is_second_player? 
-      current_player_mark = player_two_mark
+      current_player_mark = player_presenter.player_two_mark
     end
     current_player_mark
   end
 
-  def process_next_player(current_player_mark, player_one_mark) 
+  def set_next_player_mark(player_presenter) 
     if is_second_player? 
-      current_player_mark = player_one_mark
+      current_player_mark = player_presenter.player_one_mark
     end
     current_player_mark
   end
   
-  def process_move(current_player_mark, current_player_type, next_player_mark, move)
-    if current_player_type == HUMAN 
-      @move_maker.make_human_move(current_player_mark, move)
+  def process_move(player_presenter, move)
+    if player_presenter.current_player_type == HUMAN 
+      @move_maker.make_human_move(player_presenter, move)
     else
-      @move_maker.ai_move(current_player_mark, next_player_mark)
+      @move_maker.ai_move(player_presenter)
     end
   end
 
