@@ -1,9 +1,9 @@
-class ParamProcessor
+class ParamFinder
   def initialize(params)
     @params = params
   end
 
-  def process(symbol)
+  def find_param(symbol)
     @params[symbol]
   end
 end

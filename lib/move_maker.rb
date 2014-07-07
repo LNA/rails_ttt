@@ -13,6 +13,8 @@ class MoveMaker
     best_move = @game.ai.find_best_move(@game.board, player_presenter.current_player_mark, player_presenter.next_player_mark)
     @game.board.fill(best_move, player_presenter.current_player_mark)
   end
+  
+private
 
   def is_second_player?
     @game.board.count(nil).even?

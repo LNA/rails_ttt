@@ -4,7 +4,7 @@ require 'game'
 require 'game_rules'
 require 'player'
 require 'players'
-require 'param_processor'
+require 'param_finder'
 
 class WebGameStore
   @@games = []
@@ -21,6 +21,13 @@ class WebGameStore
     @@games << self
   end
 
+  def self.create_players_from(params) 
+    @player_one_mark = ParamFinder.new(params).find_param(:player_one_mark) 
+    @player_one_type = ParamFinder.new(params).find_param(:player_one_type)
+    @player_two_mark = ParamFinder.new(params).find_param(:player_two_mark)
+    @player_two_type = ParamFinder.new(params).find_param(:player_two_type)
+  end
+
   def self.game_rules
     @game_rules = GameRules.new
   end
@@ -31,13 +38,6 @@ class WebGameStore
 
   def self.ai
     @ai = AI.new(GameRules.new)
-  end
-
-  def self.process(params) # better name
-    @player_one_mark = ParamProcessor.new(params).process(:player_one_mark) 
-    @player_one_type = ParamProcessor.new(params).process(:player_one_type)
-    @player_two_mark = ParamProcessor.new(params).process(:player_two_mark)
-    @player_two_type = ParamProcessor.new(params).process(:player_two_type)
   end
 
   def self.player_one
@@ -53,13 +53,12 @@ class WebGameStore
   end
 
   def self.game(params)
-    self.process(params)
+    self.create_players_from(params)
     @game = WebGameStore.ttt_wrapper
-    @game
   end
 
   def self.updated_game(params)
-    self.process(params)
+    self.create_players_from(params)
     @game = WebGameStore.update_ttt_wrapper
   end
 
