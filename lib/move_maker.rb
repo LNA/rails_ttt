@@ -10,8 +10,13 @@ class MoveMaker
   end
 
   def ai_move(player_presenter) 
-    best_move = @game.ai.find_best_move(@game.board, player_presenter.current_player_mark, player_presenter.next_player_mark)
-    @game.board.fill(@game.board, best_move, player_presenter.current_player_mark)
+    if is_second_player?
+      best_move = @game.ai.find_best_move(@game.board, player_presenter.player_two_mark, player_presenter.player_one_mark)
+      @game.board[best_move] = player_presenter.player_two_mark
+    else
+      best_move = @game.ai.find_best_move(@game.board, player_presenter.player_one_mark, player_presenter.player_two_mark)
+      @game.board[best_move] = player_presenter.player_one_mark
+    end
   end
   
 private

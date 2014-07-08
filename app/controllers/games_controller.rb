@@ -4,7 +4,7 @@ class GamesController < ApplicationController
   def create 
     @game = WebGameStore.game(params)
     @player_presenter = PlayerPresenter.new(@game)
-    board_adapter = BoardAdapter.new(self, @player_presenter.player_one_type) 
+    board_adapter = BoardAdapter.new(self, @player_presenter.current_player)  
     board_adapter.render_board 
   end
 
@@ -12,7 +12,7 @@ class GamesController < ApplicationController
     @game = WebGameStore.updated_game(params)
     @player_presenter = PlayerPresenter.new(@game)
     @game.board = StringToObjectProcessor.new.build_from(params[:board])
-    MovePresenter.present_move(@game, params[:square].to_i, @player_presenter)
+    MovePresenter.present_move(@game, params[:square].to_i, @player_presenter) 
     board_wrapper = BoardWrapper.new(@game)
     params[:board] = board_wrapper.convert_board_to_string
     update_adapter = UpdateAdapter.new(self, @game) 
@@ -23,8 +23,8 @@ class GamesController < ApplicationController
     @game = WebGameStore.updated_game(params)
     @game.board = StringToObjectProcessor.new.build_from(params[:board])
     @player_presenter = PlayerPresenter.new(@game)
-    adapter = BoardAdapter.new(self, @player_presenter.next_player_type) 
-    adapter.render_board
+    board_adapter = BoardAdapter.new(self, @player_presenter.current_player) 
+    board_adapter.render_board
   end
 
   def render_auto_refresh_board

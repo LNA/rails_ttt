@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'minimax_ttt', '0.0.9'
+gem 'minimax_ttt', '1.0.0'
 gem 'pry'
 gem 'rspec-rails'
 gem 'minitest'

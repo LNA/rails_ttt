@@ -3,7 +3,6 @@ require 'board'
 require 'game'
 require 'game_rules'
 require 'player'
-require 'players'
 require 'param_finder'
 
 class WebGameStore
