@@ -7,10 +7,10 @@ class MoveProcessor
 
   HUMAN = "Human"
 
-  def process(player_presenter, move)
+  def process(board, move, player_presenter)
     current_player_mark = set_current_player_mark(player_presenter)
     next_player_mark    = set_next_player_mark(player_presenter)
-    process_move(player_presenter, move)
+    process_move(board, move, player_presenter)
   end
   
   private
@@ -29,9 +29,9 @@ class MoveProcessor
     current_player_mark
   end
   
-  def process_move(player_presenter, move)
+  def process_move(board, move, player_presenter)
     if player_presenter.current_player_type == HUMAN 
-      @move_maker.make_human_move(player_presenter, move)
+      @move_maker.make_human_move(board, move, player_presenter)
     else
       @move_maker.ai_move(player_presenter)
     end

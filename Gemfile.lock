@@ -54,7 +54,7 @@ GEM
       treetop (~> 1.4.8)
     method_source (0.8.2)
     mime-types (1.25.1)
-    minimax_ttt (0.0.8)
+    minimax_ttt (0.0.9)
     minitest (5.3.5)
     multi_json (1.10.1)
     polyglot (0.3.5)
@@ -142,7 +142,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   json
-  minimax_ttt (= 0.0.8)
+  minimax_ttt (= 0.0.9)
   minitest
   pry
   rails (= 4.1.1)

@@ -3,15 +3,15 @@ class MoveMaker
     @game = game
   end
 
-  def make_human_move(player_presenter, move)
-    if valid_move?(move)
+  def make_human_move(board, move, player_presenter)
+    if valid_move?(board, move)
       make_move(player_presenter, move)
     end
   end
 
   def ai_move(player_presenter) 
     best_move = @game.ai.find_best_move(@game.board, player_presenter.current_player_mark, player_presenter.next_player_mark)
-    @game.board.fill(best_move, player_presenter.current_player_mark)
+    @game.board.fill(@game.board, best_move, player_presenter.current_player_mark)
   end
   
 private
@@ -20,8 +20,8 @@ private
     @game.board.count(nil).even?
   end
 
-  def valid_move?(move)
-    @game.board[move] == nil && move.to_i < 9
+  def valid_move?(board, move)
+    @game.game_rules.valid?(board, move)
   end
 
   def make_move(player_presenter, move)

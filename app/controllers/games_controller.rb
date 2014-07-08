@@ -12,7 +12,7 @@ class GamesController < ApplicationController
     @game = WebGameStore.updated_game(params)
     @player_presenter = PlayerPresenter.new(@game)
     @game.board = StringToObjectProcessor.new.build_from(params[:board])
-    MovePresenter.present_move(@game, @player_presenter, params[:square].to_i)
+    MovePresenter.present_move(@game, params[:square].to_i, @player_presenter)
     board_wrapper = BoardWrapper.new(@game)
     params[:board] = board_wrapper.convert_board_to_string
     update_adapter = UpdateAdapter.new(self, @game) 

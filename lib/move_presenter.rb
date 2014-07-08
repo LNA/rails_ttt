@@ -9,7 +9,7 @@ class MovePresenter
     MoveProcessor.new(game, MoveMaker.new(game))
   end
 
-  def self.present_move(game, player_presenter, move) 
-    move_processor(game).process(player_presenter, move)
+  def self.present_move(game, move, player_presenter) 
+    move_processor(game).process(game.board, move, player_presenter)
   end
 end
