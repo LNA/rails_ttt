@@ -4,7 +4,7 @@ class GamesController < ApplicationController
   def create 
     @game = WebGameStore.game(params)
     @player_presenter = PlayerPresenter.new(@game)
-    board_adapter = BoardAdapter.new(self, @player_presenter.current_player)  
+    board_adapter = BoardAdapter.new(self, @player_presenter.current_player_type)  
     board_adapter.render_board 
   end
 
@@ -23,7 +23,7 @@ class GamesController < ApplicationController
     @game = WebGameStore.updated_game(params)
     @game.board = StringToObjectProcessor.new.build_from(params[:board])
     @player_presenter = PlayerPresenter.new(@game)
-    board_adapter = BoardAdapter.new(self, @player_presenter.current_player) 
+    board_adapter = BoardAdapter.new(self, @player_presenter.current_player_type) 
     board_adapter.render_board
   end
 

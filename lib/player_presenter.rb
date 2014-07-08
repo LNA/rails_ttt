@@ -14,10 +14,6 @@ class PlayerPresenter
     @current_player_mark = @game.player_one.mark
   end
 
-  def current_player_type
-    @current_player_type = @game.player_one.type
-  end
-
   def player_one_mark
     @player_one_mark = @game.player_one.mark 
   end
@@ -42,7 +38,7 @@ class PlayerPresenter
     @current_player_type == @game.player_one.type ? @game.player_two.type : @game.player_one.type
   end
 
-  def current_player
+  def current_player_type
     if @game.board.count(nil).odd?
       player = @game.player_one.type
     else
