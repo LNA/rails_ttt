@@ -4,7 +4,7 @@ class MockGame
                 :game_rules, 
                 :player_one, :player_two
 
-  def initialize(ai, board, game_rules, player_one)
+  def initialize(ai, board, game_rules, player_one, player_two)
     @ai         = ai
     @board      = board
     @game_rules = game_rules

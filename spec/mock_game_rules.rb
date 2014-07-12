@@ -17,7 +17,6 @@ class MockGameRules
 
   def game_over?(mock_board)
     @checked_for_game_over = false
-    # @game_over_values.shift || true
   end
 
   def winner(mock_board)

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe BoardWrapper  do
-  let(:mock_game)    { MockGame.new(double, double, double, double)}
+  let(:mock_game)    { MockGame.new(double, double, double, double, double)}
   let(:test_wrapper) { BoardWrapper.new(mock_game)}
 
   it "returns the board as a string" do 

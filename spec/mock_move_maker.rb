@@ -6,11 +6,11 @@ class MockMoveMaker
     @game = "game"
   end
 
-  def make_human_move(current_player_mark, move)
+  def make_human_move(board, current_player_mark, move)
     @make_human_move = true
-  end
+  end 
 
-  def ai_move
-    @made_ai_move
+  def ai_move(player_presenter)
+    @made_ai_move = true
   end
 end
